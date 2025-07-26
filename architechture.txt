@@ -1,0 +1,52 @@
+
+🗳️ Online Voting System – Project Description
+
+The Online Voting System is a secure and user-friendly web backend application that allows authenticated users to vote for a list of candidates and view real-time voting results. The system enforces a one-person-one-vote policy using unique government-issued Aadhar Card numbers and includes admin-only functionalities for managing candidates.
+
+🔧 Tech Stack
+- Backend: Node.js, Express.js
+- Database: MongoDB (with Mongoose)
+- Authentication: JWT (JSON Web Tokens)
+- Password Security: BcryptJS
+
+🚀 Key Features
+
+👤 User Authentication
+- Signup with name, aadharCardNumber, and password
+- Login using aadharCardNumber and password
+- JWT-based session handling
+- Secure password hashing using bcrypt
+
+🗳️ Voting System
+- Authenticated users can vote only once
+- Voting is allowed only for non-admin users
+- Vote is cast by choosing a candidate via POST /vote/:candidateId
+- After voting, user’s status is updated to hasVoted: true
+
+📊 Live Vote Count
+- Public route to view all candidates with their current vote counts
+- Results are sorted in descending order of vote count
+
+⚙️ Admin Functionalities
+- Admins cannot vote
+- Admins can:
+  - Add new candidates
+  - Edit candidate details
+  - Delete candidates
+
+🔐 User Profile
+- View own profile info (GET /profile)
+- Change password (PUT /profile/password)
+
+🛡️ Security & Constraints
+- One vote per user (tracked via hasVoted flag)
+- Users authenticated via Aadhar Card (used as unique ID)
+- Admin-only access controlled via middleware
+- JWT tokens used to secure routes
+
+📁 Folder Structure (Basic)
+/models         → Mongoose models (User, Candidate)
+/routes         → Route controllers (auth, vote, profile, admin)
+/middleware     → JWT auth & admin checks
+.env            → Secrets (Mongo URI, JWT secret)
+app.js          → Main server entry point
